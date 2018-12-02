@@ -13,14 +13,14 @@ Reliable message delivery is only available in Salesforce API version 37.0 and l
 ```
 
 ## Creating a PushTopic 
-you need to first create a PushTopic that contains an SOQL query.
-Go to the developer console of your Salesforce account and click on Debug->Open Execute Anonymous Window. Add the following entry in the Enter Apex Code window. 
+you need to first [create a object in salesforce](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/create_object.htm) and [create PushTopic](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/create_a_pushtopic.htm) that contains an SOQL query.
+Go to the developer console of your Salesforce account and click on **Debug->Open Execute Anonymous Window.** Add the following entry in the Enter Apex Code window. 
 
 ```
 PushTopic pushTopic = new PushTopic();
 pushTopic.Name = 'InvoiceStatementUpdates';
 pushTopic.Query = 'SELECT Id, Name, wso2__Status__c, wso2__Description__c FROM InvoiceStatement__c';
-pushTopic.ApiVersion = 35.0;
+pushTopic.ApiVersion = 37.0;
 pushTopic.NotifyForOperationCreate = true;
 pushTopic.NotifyForOperationUpdate = true;
 pushTopic.NotifyForOperationUndelete = true;
@@ -28,7 +28,7 @@ pushTopic.NotifyForOperationDelete = true;
 pushTopic.NotifyForFields = 'Referenced';
 insert pushTopic;
 ```
-Click Execute.
+Click **Execute**.
 
 ## Retrieving the Account information 
 WSO2 ESB Salesforce inbound endpoint acts as a message consumer. It creates a connection to the Salesforce account, consumes the Salesforce data and injects the data to the ESB sequence.
@@ -61,16 +61,52 @@ Now that you have configured the Salesforce streaming inbound endpoint, use the 
 </inboundEndpoint>
 ```
 * connection.salesforce.replay: replay enable or disable. If this enabled read from event id stored in registry DB or from the text file stored in the local machine.
-* connection.salesforce.EventIDStoredFilePath: leave this property to empty if need to replay from last event id stored in registry DB (property-“eventID” resource path:connector/salesforce/event)
-* connection.salesforce.EventIDStoredFilePath: when replay enabled and specify a text file to replay onwards the stored event id from the file specified here.
+* connection.salesforce.EventIDStoredFilePath:
+    - when replay enabled, leave this property to empty if need to replay from last event id stored in registry DB (property-“eventID” resource path:connector/salesforce/event).
+    - when replay enabled and specify a text file to replay onwards the stored event id from the file specified here.
+    ```
+    In case of failure default value will be used to retriev from current events. Create propety “eventID” in registry DB in resource path connector/salesforce/event. 
+    ```
 * connection.salesforce.packageVersion: The version of the connection.salesforce.packageName.
 * connection.salesforce.salesforceObject : The name of the push topic or platform event that is added to the Salesforce account.
 * connection.salesforce.loginEndpoint: The endpoint for the Salesforce account.
 * connection.salesforce.userName:  The user name for accessing the Salesforce account.
-* connection.salesforce.password: The password provided here is a concatenation of the user password and the security token provided by Salesforce. For information on creating a security token in Salesforce, see https://help.salesforce.com/articleView?id=user_security_token.htm&type=5.
-* connection.salesforce.connectionTimeout: The time to connect to the Salesforce account (default : 20 * 1000 mili seconds).
-* connection.salesforce.waitTime: The time to wait when connecting to the client (default : 5 * 1000 ms).
+* connection.salesforce.password: The password provided here is a concatenation of the user password and the security token provided by Salesforce.[information on creating a security token in Salesforce](https://help.salesforce.com/articleView?id=user_security_token.htm&type=5).
+* connection.salesforce.connectionTimeout: The time to wait when connecting to the client(default : 20 * 1000 ms).
+* connection.salesforce.waitTime: The time to connect to the Salesforce account(default : 5 * 1000 ms).
 * connection.salesforce.soapApiVersion: The version of the salesforce soap API.
+
+## Platform Event
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
