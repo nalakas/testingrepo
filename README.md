@@ -12,6 +12,10 @@ The Salesforce streaming inbound endpoint allows you to perform various Salesfor
 Reliable message delivery is only available in Salesforce API version 37.0 and later.
 ```
 
+## How To Use
+[Download the inbound endpoit jar](https://store.wso2.com/store/assets/esbconnector/details/fbb433b5-4d74-4064-84c2-e4b23c531aa2) or build the project ** mvn clean install ** to get the jar and add it in the <ESB-Home>/dropin directory.
+
+
 ## Creating a PushTopic 
 you need to first [create a custome object in salesforce](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/create_object.htm) and [create PushTopic](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/create_a_pushtopic.htm) that contains an SOQL query.
 Go to the developer console of your Salesforce account and click on **Debug->Open Execute Anonymous Window.** Add the following entry in the Enter Apex Code window. 
@@ -31,8 +35,7 @@ insert pushTopic;
 Click **Execute**.
 
 
-
-## Retrieving the Account information 
+## Retrieving the Account Information 
 WSO2 ESB Salesforce inbound endpoint acts as a message consumer. It creates a connection to the Salesforce account, consumes the Salesforce data and injects the data to the ESB sequence.
 Now that you have configured the Salesforce streaming inbound endpoint, use the following ESB inbound endpoint configuration to retrieve account details from your Salesforce account.
 
@@ -108,6 +111,14 @@ if (sr.isSuccess()) {
 ```
 Click **Execute**.
 Event will be triggered in the ESB real time.
+
+## How to Contribute
+
+  * Please report issues at [GitHub Issue](https://github.com/wso2-extensions/esb-inbound-salesforce/issues).
+   
+  * Send your contributions as pull requests to [master branch](https://github.com/wso2-extensions/esb-inbound-salesforce).
+
+
 
 
 
