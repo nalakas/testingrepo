@@ -4,7 +4,7 @@ The Salesforce streaming inbound endpoint allows you to perform various Salesfor
 
 1.The Salesforce streaming API receives notifications for changes to Salesforce data that match a Salesforce Object Query Language (SOQL) query you define, in a secure and scalable way. For more information see [Salesforce streaming documentation](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/quick_start_workbench.htm) .
 
-2.[Platform events](https://developer.salesforce.com/docs/atlas.en-us.platform_events.meta/platform_events/platform_events_intro.htm)
+2.[Platform events](#platform-event)
 
 
 
@@ -13,7 +13,7 @@ Reliable message delivery is only available in Salesforce API version 37.0 and l
 ```
 
 ## Creating a PushTopic 
-you need to first [create a object in salesforce](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/create_object.htm) and [create PushTopic](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/create_a_pushtopic.htm) that contains an SOQL query.
+you need to first [create a custome object in salesforce](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/create_object.htm) and [create PushTopic](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/create_a_pushtopic.htm) that contains an SOQL query.
 Go to the developer console of your Salesforce account and click on **Debug->Open Execute Anonymous Window.** Add the following entry in the Enter Apex Code window. 
 
 ```
@@ -29,6 +29,8 @@ pushTopic.NotifyForFields = 'Referenced';
 insert pushTopic;
 ```
 Click **Execute**.
+
+
 
 ## Retrieving the Account information 
 WSO2 ESB Salesforce inbound endpoint acts as a message consumer. It creates a connection to the Salesforce account, consumes the Salesforce data and injects the data to the ESB sequence.
@@ -77,6 +79,36 @@ Now that you have configured the Salesforce streaming inbound endpoint, use the 
 * connection.salesforce.soapApiVersion: The version of the salesforce soap API.
 
 ## Platform Event
+[Define a platform event](https://developer.salesforce.com/docs/atlas.en-us.platform_events.meta/platform_events/platform_events_intro.htm) in the same way you define a custom object in salesforce.
+
+
+In ESB configuration specify the event need to subscribe.
+```
+<parameter name="connection.salesforce.salesforceObject">/event/InvoiceStatementReading1s__e</parameter>
+```
+Go to the developer console of your Salesforce account and click on **Debug->Open Execute Anonymous Window.** Add the following entry in the Enter Apex Code window.See more [here](https://developer.salesforce.com/docs/atlas.en-us.platform_events.meta/platform_events/platform_events_publish_apex.htm).
+
+```
+InvoiceStatementReading1s__e event = new InvoiceStatementReading1s__e(Status__c='nnn24');
+
+// Publish event.
+Database.SaveResult sr = EventBus.publish(event);
+
+// Inspect publishing result for each event
+if (sr.isSuccess()) {
+    System.debug('Successfully published event.');
+} else {
+    for(Database.Error err : sr.getErrors()) {
+        System.debug('Error returned: ' +
+                    err.getStatusCode() +
+                    ' - ' +
+                    err.getMessage());
+    }
+}
+```
+Click **Execute**.
+Event will be triggered in the ESB real time.
+
 
 
 
