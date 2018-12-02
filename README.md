@@ -1,6 +1,7 @@
 # Configuring Salesforce Inbound Endpoint
 
 The Salesforce streaming inbound endpoint allows you to perform various Salesforce streaming data via WSO2 ESB.
+
 1.The Salesforce streaming API receives notifications for changes to Salesforce data that match a Salesforce Object Query Language (SOQL) query you define, in a secure and scalable way. For more information see [Salesforce streaming documentation](https://developer.salesforce.com/docs/atlas.en-us.202.0.api_streaming.meta/api_streaming/quick_start_workbench.htm) .
 
 2.[Platform events](https://developer.salesforce.com/docs/atlas.en-us.platform_events.meta/platform_events/platform_events_intro.htm)
