@@ -72,13 +72,13 @@ Now that you have configured the Salesforce streaming inbound endpoint, use the 
     ```
     In case of failure default value will be used to retriev from current events. Create propety “eventID” in registry DB in resource path connector/salesforce/event. 
     ```
-* connection.salesforce.packageVersion: The version of the connection.salesforce.packageName.
+* connection.salesforce.packageVersion: The version of the salesforce API.
 * connection.salesforce.salesforceObject : The name of the push topic or platform event that is added to the Salesforce account.
 * connection.salesforce.loginEndpoint: The endpoint for the Salesforce account.
 * connection.salesforce.userName:  The user name for accessing the Salesforce account.
 * connection.salesforce.password: The password provided here is a concatenation of the user password and the security token provided by Salesforce.[information on creating a security token in Salesforce](https://help.salesforce.com/articleView?id=user_security_token.htm&type=5).
-* connection.salesforce.connectionTimeout: The time to wait when connecting to the client(default : 20 * 1000 ms).
 * connection.salesforce.waitTime: The time to connect to the Salesforce account(default : 5 * 1000 ms).
+* connection.salesforce.connectionTimeout: The time to wait when connecting to the client(default : 20 * 1000 ms).
 * connection.salesforce.soapApiVersion: The version of the salesforce soap API.
 
 ## Platform Event
@@ -117,39 +117,4 @@ Event will be triggered in the ESB real time.
   * Please report issues at [GitHub Issue](https://github.com/wso2-extensions/esb-inbound-salesforce/issues).
    
   * Send your contributions as pull requests to [master branch](https://github.com/wso2-extensions/esb-inbound-salesforce).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
