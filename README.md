@@ -117,4 +117,8 @@ Event will be triggered in the ESB real time.
   * Please report issues at [GitHub Issue](https://github.com/wso2-extensions/esb-inbound-salesforce/issues).
    
   * Send your contributions as pull requests to [master branch](https://github.com/wso2-extensions/esb-inbound-salesforce).
+  
+  Also you can create a third party connector and publish in WSO2 Connector Store.
+
+https://docs.wso2.com/display/ESBCONNECTORS/Creating+a+Third+Party+Connector+and+Publishing+in+WSO2+Connector+Store
 
